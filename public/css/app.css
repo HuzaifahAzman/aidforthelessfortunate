@@ -1,0 +1,29 @@
+.body {
+    background-color: #e9ecef;
+    /* background-color: #f5f7fb !important; */
+    /* background-color: #FFFAFA !important; */
+    /* margin: 0 25px 0; */
+}
+
+.footer {
+    /* position: fixed; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: rgba(0,0,0,.5);
+    text-align: center;
+}
+
+.marquee-header {
+    text-transform: capitalize;
+    color: #24486a;
+    font-weight: 700;
+    font-size: large;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  
+    display: flex;
+    align-items: center;
+}

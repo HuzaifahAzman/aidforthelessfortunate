@@ -1,0 +1,4 @@
+bcrypt('');
+\Str::random(50)
+
+https://cuba.kitabantu.com/dashboard
