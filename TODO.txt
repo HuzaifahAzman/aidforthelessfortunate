@@ -4,3 +4,6 @@ bcrypt('');
 https://cuba.kitabantu.com/dashboard
 
 test
+
+https://stackoverflow.com/questions/16791613/add-a-new-column-to-existing-table-in-a-migration
+ni untuk migration
