@@ -28,6 +28,8 @@ Route::get('/reports/form', 'ReportsController@showPublic'); // TODO submit repo
 
 Route::group(['middleware' => 'CheckAdminLoginMiddleware'], function () {
     Route::get('/admin/dashboard', 'DashboardController@adminDashboard');
+    Route::get('/admin/dashboard/editCampaign', 'DashboardController@adminDashboardEditCampaign');
+    Route::post('/editCampaign', 'CampaignController@updateCampaign');
     Route::resource('/admin/lessfortunates', 'LessFortunateController'); // TODO search & filter
     Route::resource('/admin/volunteers', 'UsersController'); 
     Route::resource('/admin/reports', 'ReportsController'); // TODO manage User Report

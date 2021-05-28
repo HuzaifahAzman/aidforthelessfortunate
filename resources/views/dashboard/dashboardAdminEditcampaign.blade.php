@@ -42,24 +42,30 @@
         <div class="card-body">
             <h5>Aid Accomplishment Progress</h5>
             <hr>
+            {!! Form::open(['action' => 'CampaignController@updateCampaign', 'method' => 'POST', 'id' => 'editForm']) !!}
+            {{-- {{Form::hidden('_method', 'PUT')}} --}}
             <div class="row my-0 px-4">
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <div class="form-group">
-                        <div class="form-label text-gray">Campaign Start</div> 
-                        <input class="form-control" type="date" name="begin" placeholder="dd-mm-yyyy" value="{{$beginCampaign['begin']}}" min="1997-01-01" max="2030-12-31" readonly>
+                        <div class="form-group">
+                            <div class="form-label text-gray">Campaign Start</div> 
+                            <input class="form-control" type="date" name="begin" placeholder="dd-mm-yyyy" value="{{$beginCampaign['begin']}}" min="1997-01-01" max="2030-12-31">
+                        </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <div class="form-label text-gray">Campaign End</div> 
-                        <input class="form-control" type="date" name="end" placeholder="dd-mm-yyyy" value="{{$endCampaign['end']}}" min="1997-01-01" max="2030-12-31" readonly>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <div class="form-label text-gray">Campaign End</div> 
+                            <input class="form-control" type="date" name="end" placeholder="dd-mm-yyyy" value="{{$endCampaign['end']}}" min="1997-01-01" max="2030-12-31">
+                        </div>
                     </div>
-                </div>
                 <div class="col-2"></div>
             </div>
+            {!! Form::close() !!}
             <div class="row">
-                <a class="btn btn-primary mx-auto" href="/admin/dashboard/editCampaign">Update Campaign Date</a>
+                <div class="mx-auto">
+                    <button type="button" class="btn btn-success" onclick="confirmEdit()">Update Changes</button>
+                    <a class="btn btn-danger " href="/admin/dashboard">Cancel</a>
+                </div>
             </div>
             <hr>
             <div class="row text-center mb-2">
@@ -89,3 +95,12 @@
 
 <br>
 @endsection
+
+<script>
+    function confirmEdit() {
+        var result = confirm("Confirm edit?");
+        if (result) {
+            document.getElementById("editForm").submit();// Form submission
+        } 
+    }
+</script>
