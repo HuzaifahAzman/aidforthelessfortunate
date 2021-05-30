@@ -21,7 +21,9 @@
         <div class="card-body">
             <div class="card">
                 <div class="card-body">
-                    {!! Form::open(['action' => ['LessFortunateController@update', $lessfortunate->id], 'method' => 'POST', 'id' => 'editForm']) !!}
+                    {!! Form::open(['action' => 'ReportsController@storeVolunteer', 'method' => 'POST', 'id' => 'editForm']) !!}
+                    {{Form::hidden('id', $lessfortunate->id)}}
+                    {{Form::hidden('reportType', 'correction')}}
                         <div class="form-group">
                             {{Form::label('name', 'Name')}}
                             {{Form::text('name', $lessfortunate->name, ['class' => 'form-control', 'placeholder' => 'Name'])}}
@@ -51,9 +53,9 @@
                             {{Form::text('postcode', $lessfortunate->postcode, ['class' => 'form-control', 'placeholder' => 'Adress Line 2'])}}
                         </div>
                         <div class="form-group">
-                            {{Form::hidden('_method', 'PUT')}}
-                            <button type="button" class="btn btn-primary" onclick="confirmEdit()">Submit</button>
-                            {{-- {{Form::submit('Submit', ['class' => 'btn btn-primary', 'onClick' => 'confirmDelete()'])}}; --}}
+                            {{-- {{Form::hidden('_method', 'PUT')}} --}}
+                            {{-- <button type="button" class="btn btn-primary" onclick="confirmEdit()">Submit</button> --}}
+                            {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
                         </div>
                     {!! Form::close() !!}
                 </div>

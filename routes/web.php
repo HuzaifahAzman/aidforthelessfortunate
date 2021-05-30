@@ -24,7 +24,8 @@ Route::get('/lessfortunates', 'LessFortunateController@indexPublic'); // TODO se
 Route::get('/lessfortunates/find/{id}', 'LessFortunateController@showPublic');
 // TODO open map
 Route::get('/reports', 'ReportsController@indexPublic'); 
-Route::get('/reports/form', 'ReportsController@showPublic'); // TODO submit report
+Route::get('/reports/form', 'ReportsController@showPublic'); 
+Route::post('/reports/submitform', 'ReportsController@storePublic'); // TODO submit report new LF
 
 Route::group(['middleware' => 'CheckAdminLoginMiddleware'], function () {
     Route::get('/admin/dashboard', 'DashboardController@adminDashboard');
@@ -44,6 +45,7 @@ Route::group(['middleware' => 'CheckVolunteerLoginMiddleware'], function () {
     // TODO open map
     Route::get('/volunteer/reports', 'ReportsController@indexVolunteer');
     Route::get('/volunteer/reports/form', 'ReportsController@showVolunteer'); // TODO submit report
+    Route::post('/volunteer/reports/submitform', 'ReportsController@storeVolunteer'); // TODO submit report new LF
     // TODO Aid Accomplistment
     // TODO QR
     Route::get('/logoutAuth', 'AuthenticationsController@logout')->name('logout');

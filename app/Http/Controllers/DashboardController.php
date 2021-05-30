@@ -17,6 +17,8 @@ class DashboardController extends Controller
             'numVolunteer' => User::where('userType','Volunteer')->count(),
             'numAdmin' => User::where('userType','Admin')->count(),
             'aidAccomplished' => LessFortunate::where('state','Johor')->count(), //TODO status aid
+            'beginCampaign' => Campaign::select('begin')->latest()->first(),
+            'endCampaign' => Campaign::select('end')->latest()->first(),
             'random' => ['Docs', 'Programming', 'RTSE']
         );
         
@@ -60,6 +62,8 @@ class DashboardController extends Controller
             'numVolunteer' => User::where('userType','Volunteer')->count(),
             'numAdmin' => User::where('userType','Admin')->count(),
             'aidAccomplished' => LessFortunate::where('state','Johor')->count(), //TODO status aid
+            'beginCampaign' => Campaign::select('begin')->latest()->first(),
+            'endCampaign' => Campaign::select('end')->latest()->first(),
             'random' => ['Docs', 'Programming', 'RTSE']
         );
         
