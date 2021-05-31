@@ -7,3 +7,6 @@ test
 
 https://stackoverflow.com/questions/16791613/add-a-new-column-to-existing-table-in-a-migration
 ni untuk migration
+php artisan make:migration add_paid_to_users_table --table=users
+
+->withErrors('error!');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Report;
 use App\LessFortunate;
+use DB;
 use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,19 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        $reports =  Report::orderBy('id', 'asc')->paginate(2);
+        // $reports =  Report::orderBy('id', 'asc')->paginate(4);
+        $joinedreports =  DB::table('reports')
+                    ->join('less_fortunates', 'less_fortunates.id', '=', 'reports.lessFortunate_id')
+                    ->select('reports.*', 'less_fortunates.name as LF_name', 'less_fortunates.address as LF_address',
+                    'less_fortunates.address2 as LF_address2', 'less_fortunates.city as LF_city', 'less_fortunates.state as LF_state',
+                    'less_fortunates.postcode as LF_postcode', 'less_fortunates.phone as LF_phone', 'less_fortunates.postcode as postcode',
+                    'less_fortunates.phone as LF_phone')
+                    ->orderBy('lessFortunate_id', 'asc')
+                    ->paginate(4);
 
-        return view('reports.index')->with('reports', $reports);
+        // dd($reports);
+
+        return view('reports.index')->with('reports', $joinedreports);
     }
 
     public function indexPublic()
@@ -50,6 +61,19 @@ class ReportsController extends Controller
             'postcode' => 'required',
             'reportType' => 'required',
         ]);
+
+        $lessfortunate = LessFortunate::find($request->input('id'));
+
+        if ($lessfortunate->name == $request->input('name') &&
+            $lessfortunate->phone == $request->input('phone') &&
+            $lessfortunate->address == $request->input('address') &&
+            $lessfortunate->address2 == $request->input('address2') &&
+            $lessfortunate->city == $request->input('city') &&
+            $lessfortunate->state == $request->input('state') &&
+            $lessfortunate->postcode == $request->input('postcode')
+            ) {
+            return redirect('/reports')->withErrors('Report Has Been Rejected: No changes from the original data');
+        }
 
         $report = new Report;
         $report->lessFortunate_id = $request->input('id');
@@ -153,9 +177,41 @@ class ReportsController extends Controller
      * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Report $report) //TODO activation
+    public function update(Request $request, $id) //TODO activation
     {
-        //
+        $this->validate($request, [
+            'action' => 'required',
+        ]);
+
+        $report = Report::find($id);
+        
+        if ($request->input('action') == 'approve'){
+            $action = $request->input('action') . 'd';
+
+            $report->status = $action;
+    
+            $report->save();
+
+            $lessfortunate = LessFortunate::find($request->input('lf_id'));
+            $lessfortunate->name = $request->input('name');
+            $lessfortunate->phone = $request->input('phone');
+            $lessfortunate->address = $request->input('address');
+            $lessfortunate->address2 = $request->input('address2');
+            $lessfortunate->city = $request->input('city');
+            $lessfortunate->state = $request->input('state');
+            $lessfortunate->postcode = $request->input('postcode');
+
+            $lessfortunate->save();
+        }
+        else {
+            $action = $request->input('action') . 'ed';
+
+            $report->status = $action;
+    
+            $report->save();
+        }
+        
+        return redirect('/admin/reports')->with('success', 'Report Has Been ' . ucfirst($action));
     }
 
     /**
