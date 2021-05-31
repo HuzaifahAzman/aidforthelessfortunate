@@ -8,7 +8,11 @@
             <div class="card" style="margin-bottom: 12px">
                 <div class="card-body">
                     <h4><a href="/admin/lessfortunates/{{$a->id}}">{{$a->name}}</a></h4>
-                    <p style="margin-top: 12px">Address: {{$a->address}} {{$a->address2}} {{$a->city}} {{$a->state}} {{$a->postcode}}</p>
+                    <p style="margin-top: 12px">Address: {{$a->address}} {{$a->address2}} {{$a->postcode}} {{$a->city}} {{$a->state}}
+                        <a href="http://maps.google.com/?q={{$a->address}} {{$a->address2}} {{$a->postcode}} {{$a->city}} {{$a->state}}">
+                            <i class="material-icons" style="font-size:30px;color:red">place</i>
+                        </a>
+                    </p>
                     <p>Phone: {{$a->phone}}</p>
                     <small style="margin-bottom: 0">Created on {{$a->created_at}}</small>
                 </div>
