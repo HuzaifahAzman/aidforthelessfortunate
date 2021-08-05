@@ -9,14 +9,17 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/volunteer/dashboard">Home</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/volunteer/dashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/volunteer/lessfortunates">Less Fortunate</a>
+            <a class="nav-link" href="/volunteer/lessfortunates">Less Fortunate</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/volunteer/reports">Report</a>
+            <a class="nav-link" href="/volunteer/reports">Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/volunteer/aidaccomplishments">Aid Accomplishment</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navabr-right">

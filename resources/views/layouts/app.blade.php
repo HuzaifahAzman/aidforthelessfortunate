@@ -16,7 +16,6 @@
     <body class="body">
         @include('include.navbar')
         <div class="container">
-            {{-- <div>anak itik ni layout header</div> --}}
             <br>
             @include('include.messages')
             @yield('content')

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\AidAccomplishment;
 use App\LessFortunate;
+use DB;
 
 class LessFortunateController extends Controller
 {
@@ -17,7 +19,7 @@ class LessFortunateController extends Controller
         // $lessfortunates =  LessFortunate::all();
         // $lessfortunates = LessFortunate::orderBy('name', 'asc')->get();
         // $lessfortunates = LessFortunate::where('name', 'Huzaifah Azman')->get();
-        $lessfortunates =  LessFortunate::orderBy('name', 'asc')->paginate(2);
+        $lessfortunates =  LessFortunate::orderBy('id', 'asc')->paginate(7);
 
         return view('lessfortunates.index')->with('lessfortunates', $lessfortunates);
     }
@@ -138,26 +140,43 @@ class LessFortunateController extends Controller
 
     public function indexVolunteer(Request $request)
     {
-        // $lessfortunates =  LessFortunate::all();
-        // $lessfortunates = LessFortunate::orderBy('name', 'asc')->get();
-        // $lessfortunates = LessFortunate::where('name', 'Huzaifah Azman')->get();
-        $lessfortunates =  LessFortunate::orderBy('name', 'asc')->paginate(2);
+        $lessfortunates =  DB::table('less_fortunates')
+        ->leftJoin('aid_accomplishments',function ($join) {
+            $join->on('aid_accomplishments.lessFortunate_id', '=', 'less_fortunates.id') ;
+            $join->where('aid_accomplishments.status','=', 1) ;
+        })
+        ->select('less_fortunates.id as id', 'aid_accomplishments.submitted_at as submitted_at', 'less_fortunates.name as name', 'less_fortunates.address as address',
+        'less_fortunates.address2 as address2', 'less_fortunates.city as city', 'less_fortunates.state as state',
+        'less_fortunates.postcode as postcode', 'less_fortunates.phone as phone', 'less_fortunates.postcode as postcode',
+        'less_fortunates.phone as phone', 'less_fortunates.created_at as created_at', 'aid_accomplishments.status as status')
+        ->orderBy('less_fortunates.name', 'asc')
+        ->paginate(7);
 
         return view('lessfortunates.indexVolunteer')->with('lessfortunates', $lessfortunates);
     }
 
     public function showVolunteer($id)
     {
-        $lessfortunate = LessFortunate::find($id);
+        $lessfortunate = DB::table('less_fortunates')
+        ->leftJoin('aid_accomplishments',function ($join) {
+            $join->on('aid_accomplishments.lessFortunate_id', '=', 'less_fortunates.id') ;
+            $join->where('aid_accomplishments.status','=', 1) ;
+        })
+        ->select('less_fortunates.id as id', 'aid_accomplishments.submitted_at', 'less_fortunates.name as name', 'less_fortunates.address as address',
+        'less_fortunates.address2 as address2', 'less_fortunates.city as city', 'less_fortunates.state as state',
+        'less_fortunates.postcode as postcode', 'less_fortunates.phone as phone', 'less_fortunates.postcode as postcode',
+        'less_fortunates.phone as phone', 'less_fortunates.created_at as created_at', 'aid_accomplishments.status as status')
+        ->where('less_fortunates.id', $id)
+        ->first();
+
+        // dd($lessfortunate);
+
         return view('/lessfortunates/showVolunteer')->with('lessfortunate', $lessfortunate);
     }
 
     public function indexPublic(Request $request)
     {
-        // $lessfortunates =  LessFortunate::all();
-        // $lessfortunates = LessFortunate::orderBy('name', 'asc')->get();
-        // $lessfortunates = LessFortunate::where('name', 'Huzaifah Azman')->get();
-        $lessfortunates =  LessFortunate::orderBy('name', 'asc')->paginate(2);
+        $lessfortunates =  LessFortunate::orderBy('name', 'asc')->paginate(7);
     
         return view('/lessfortunates/indexPublic')->with('lessfortunates', $lessfortunates);
     }

@@ -13,63 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// TODO Breadcrumbs on all pages
-
-Route::get('/login', 'AuthenticationsController@index')->name('login');
-Route::post('/loginAuth', 'AuthenticationsController@login')->name('login');
-Route::get('/register', 'AuthenticationsController@register')->name('register');
-
-Route::get('/', 'DashboardController@publicDashboard');
-Route::get('/lessfortunates', 'LessFortunateController@indexPublic'); // TODO search & filter
-Route::get('/lessfortunates/find/{id}', 'LessFortunateController@showPublic');
-// TODO open map
-Route::get('/reports', 'ReportsController@indexPublic'); 
-Route::get('/reports/form', 'ReportsController@showPublic'); 
-Route::post('/reports/submitform', 'ReportsController@storePublic'); // TODO submit report new LF
-
-Route::group(['middleware' => 'CheckAdminLoginMiddleware'], function () {
-    Route::get('/admin/dashboard', 'DashboardController@adminDashboard');
-    Route::get('/admin/dashboard/editCampaign', 'DashboardController@adminDashboardEditCampaign');
-    Route::post('/editCampaign', 'CampaignController@updateCampaign');
-    Route::resource('/admin/lessfortunates', 'LessFortunateController'); // TODO search & filter
-    Route::resource('/admin/volunteers', 'UsersController'); 
-    Route::resource('/admin/reports', 'ReportsController'); // TODO manage User Report
-    // TODO manage View Aid Accomplishment
+Route::group(['middleware' => 'PreventBackHistory'],function(){
+    Route::get('/login', 'AuthenticationsController@index')->name('login');
+    Route::post('/loginAuth', 'AuthenticationsController@login')->name('login');
+    Route::get('/register', 'AuthenticationsController@register')->name('register');
+    
+    Route::get('/', 'DashboardController@publicDashboard');
+    Route::get('/lessfortunates', 'LessFortunateController@indexPublic'); 
+    Route::get('/lessfortunates/find/{id}', 'LessFortunateController@showPublic');
+    Route::get('/reports', 'ReportsController@indexPublic'); 
+    Route::get('/reports/form', 'ReportsController@showPublic'); 
+    Route::post('/reports/submitform', 'ReportsController@storePublic');
     Route::get('/logoutAuth', 'AuthenticationsController@logout')->name('logout');
+    
+    Route::group(['middleware' => 'CheckAdminLoginMiddleware'], function () {
+        Route::get('/admin', 'DashboardController@adminDashboard');
+        Route::get('/admin/dashboard', 'DashboardController@adminDashboard');
+        Route::get('/admin/dashboard/editCampaign', 'DashboardController@adminDashboardEditCampaign');
+        Route::post('/editCampaign', 'CampaignController@updateCampaign');
+        Route::resource('/admin/lessfortunates', 'LessFortunateController'); 
+        Route::resource('/admin/volunteers', 'UsersController'); 
+        Route::resource('/admin/reports', 'ReportsController'); 
+        Route::resource('/admin/aidaccomplishments', 'AidAccomplishmentController'); 
+        Route::get('/admin/dashboard/resetAid', 'AidAccomplishmentController@resetAidAccomplishment');
+    });
+    
+    Route::group(['middleware' => 'CheckVolunteerLoginMiddleware'], function () {
+        Route::get('/volunteer', 'DashboardController@volunteerDashboard');
+        Route::get('/volunteer/dashboard', 'DashboardController@volunteerDashboard');
+        Route::get('/volunteer/lessfortunates', 'LessFortunateController@indexVolunteer'); 
+        Route::get('/volunteer/lessfortunates/{id}', 'LessFortunateController@showVolunteer');
+        Route::get('/volunteer/reports', 'ReportsController@indexVolunteer');
+        Route::get('/volunteer/reports/form', 'ReportsController@showVolunteer');
+        Route::post('/volunteer/reports/submitform', 'ReportsController@storeVolunteer');
+        Route::get('/volunteer/aidaccomplishments', 'AidAccomplishmentController@indexVolunteer');
+        Route::post('/volunteer/submitaid', 'AidAccomplishmentController@storeVolunteer');
+    });
 });
-
-Route::group(['middleware' => 'CheckVolunteerLoginMiddleware'], function () {
-    Route::get('/volunteer/dashboard', 'DashboardController@volunteerDashboard');
-    Route::get('/volunteer/lessfortunates', 'LessFortunateController@indexVolunteer'); // TODO search & filter
-    Route::get('/volunteer/lessfortunates/{id}', 'LessFortunateController@showVolunteer');
-    // TODO open map
-    Route::get('/volunteer/reports', 'ReportsController@indexVolunteer');
-    Route::get('/volunteer/reports/form', 'ReportsController@showVolunteer'); // TODO submit report
-    Route::post('/volunteer/reports/submitform', 'ReportsController@storeVolunteer'); // TODO submit report new LF
-    // TODO Aid Accomplistment
-    // TODO QR
-    Route::get('/logoutAuth', 'AuthenticationsController@logout')->name('logout');
-});
-
-
-
-
-
-// Route::get('/lessfortunate', 'LessFortuController@welcome');
-
-
-// Route::get('/login', function () {
-//     return view('/authentications/login');
-// });
-
-// Route::get('/users/{id}', function ($id) {
-//     return 'This is user ' . $id;
-// });
-
-// Route::get('/users/{id}/{name}', function ($id, $name) {
-//     return 'This is user ' . $id . ' with name ' . $name;
-// });
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });

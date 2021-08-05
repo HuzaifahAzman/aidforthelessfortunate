@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
-use App\LessFortunate;
 use App\Campaign;
+use App\LessFortunate;
+use App\AidAccomplishment;
 
 class DashboardController extends Controller
 {
@@ -16,7 +17,7 @@ class DashboardController extends Controller
             'numLessFortunate' => DB::table('less_fortunates')->count(),
             'numVolunteer' => User::where('userType','Volunteer')->count(),
             'numAdmin' => User::where('userType','Admin')->count(),
-            'aidAccomplished' => LessFortunate::where('state','Johor')->count(), //TODO status aid
+            'aidAccomplished' => AidAccomplishment::where('status', 1)->count(),
             'beginCampaign' => Campaign::select('begin')->latest()->first(),
             'endCampaign' => Campaign::select('end')->latest()->first(),
             'random' => ['Docs', 'Programming', 'RTSE']
@@ -31,7 +32,7 @@ class DashboardController extends Controller
             'numLessFortunate' => DB::table('less_fortunates')->count(),
             'numVolunteer' => User::where('userType','Volunteer')->count(),
             'numAdmin' => User::where('userType','Admin')->count(),
-            'aidAccomplished' => LessFortunate::where('state','Johor')->count(), //TODO status aid
+            'aidAccomplished' => AidAccomplishment::where('status', 1)->count(),
             'beginCampaign' => Campaign::select('begin')->latest()->first(),
             'endCampaign' => Campaign::select('end')->latest()->first(),
             'random' => ['Docs', 'Programming', 'RTSE']
@@ -46,7 +47,7 @@ class DashboardController extends Controller
             'numLessFortunate' => DB::table('less_fortunates')->count(),
             'numVolunteer' => User::where('userType','Volunteer')->count(),
             'numAdmin' => User::where('userType','Admin')->count(),
-            'aidAccomplished' => LessFortunate::where('state','Johor')->count(), //TODO status aid
+            'aidAccomplished' => AidAccomplishment::where('status', 1)->count(),
             'beginCampaign' => Campaign::select('begin')->latest()->first(),
             'endCampaign' => Campaign::select('end')->latest()->first(),
             'random' => ['Docs', 'Programming', 'RTSE']
@@ -61,7 +62,7 @@ class DashboardController extends Controller
             'numLessFortunate' => DB::table('less_fortunates')->count(),
             'numVolunteer' => User::where('userType','Volunteer')->count(),
             'numAdmin' => User::where('userType','Admin')->count(),
-            'aidAccomplished' => LessFortunate::where('state','Johor')->count(), //TODO status aid
+            'aidAccomplished' => AidAccomplishment::where('status', 1)->count(),
             'beginCampaign' => Campaign::select('begin')->latest()->first(),
             'endCampaign' => Campaign::select('end')->latest()->first(),
             'random' => ['Docs', 'Programming', 'RTSE']

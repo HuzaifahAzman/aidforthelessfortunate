@@ -1,73 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form by Colorlib</title>
+@extends('layouts.appPublicDashboard')
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="{{asset('css/material-design-iconic-font.min.css')}}">
-
-    <!-- Main css -->
-    <link rel="stylesheet" href="{{asset('css/authentication.css')}}">
-</head>
-<body>
-    <div class="main">
-
-        <!-- Sing in  Form -->
-        <section class="sign-in">
-            <div class="container">
-                <div class="signin-content">
-                    <div class="signin-image">
-                        <h3>AID FOR THE LESS FORTUNATE</h3>
-                        <figure><img src="{{asset('images/signin-image.jpg')}}" alt="sign up image"></figure>
-                        <a href="/register" class="signup-image-link">Create an account</a>
-                        <a href="/" class="signup-image-link">Back to homescreen</a>
-                    </div>
-
-                    <div class="signin-form ">
-                        <h2 class="form-title">Sign In</h2>
-                        <form method="POST" action="{{ route('login') }}" class="register-form" id="login-form">
-                            @csrf
-                            <div class="form-group">
-                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="email" id="email" placeholder="Email"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="Password"/>
-                            </div>
-                            {{-- <div class="form-group">
-                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                            </div> --}}
-                            @if (session('message'))
-                                <div class="alert">
-                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                                    {{session('message')}}
+@section('content')
+    <div class="container">
+        <br>
+        {{-- <h3 class="text-dark mb-3">Bakul Kasih Ramadhan</h3> --}}
+    
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="card">
+                        <img class="mx-auto d-block" src="{{asset('images/bakul-kasih-ramadhan.png')}}" alt="" style="width: 200px">
+                        <div class="card-body">
+                            {!! Form::open(['action' => 'AuthenticationsController@login', 'method' => 'POST']) !!}
+                                <div class="form-group">
+                                    {{Form::label('email', 'Email')}}
+                                    {{Form::text('email', '', ['class' => 'form-control', 'placeholder' => 'Email'])}}
                                 </div>
-                            @endif
-                            <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
-                            </div>
-                        </form>
-                        {{-- <div class="social-login">
-                            <span class="social-label">Or login with</span>
-                            <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                            </ul>
-                        </div> --}}
+                                <div class="form-group">
+                                    {{Form::label('password', 'Password')}}
+                                    {{Form::password('password', ['class' => 'form-control'])}} 
+                                </div>
+                                @if (session('message'))
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="close" aria-label="Close" onclick="this.parentElement.style.display='none';">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {{-- <button type="button" class="btn-close btn-close-white" onclick="this.parentElement.style.display='none';">&times;</button> --}}
+                                        {{session('message')}}
+                                    </div>
+                                @endif
+                                <div class="form-group">
+                                    {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+                                </div>
+                            {!! Form::close() !!}
+                        </div>
                     </div>
                 </div>
+                <div class="col-2"></div>
             </div>
-        </section>
-
+        <br>
     </div>
-
-    <!-- JS -->
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+@endsection

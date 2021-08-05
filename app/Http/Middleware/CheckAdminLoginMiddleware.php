@@ -16,7 +16,7 @@ class CheckAdminLoginMiddleware
     public function handle($request, Closure $next)
     {
         if(!session('admin_login')){
-            return redirect('/');
+            return redirect('/login')->with('message', 'Please login as volunteer or admin');
         }
         return $next($request);
     }

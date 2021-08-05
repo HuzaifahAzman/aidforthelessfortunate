@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckVolunteerLoginMiddleware
+class PreventBackHistory
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,10 @@ class CheckVolunteerLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!session('volunteer_login')){
-            return redirect('/login')->with('message', 'Please login as volunteer or admin');
-        }
-        return $next($request);
+        $response = $next($request);
+ 
+        return $response->header('Cache-Control','nocache, no-store, max-age=0, must-revalidate')
+            ->header('Pragma','no-cache')
+            ->header('Expires','Sat, 26 Jul 1997 05:00:00 GMT');
     }
 }

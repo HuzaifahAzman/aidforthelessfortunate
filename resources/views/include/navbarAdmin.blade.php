@@ -9,24 +9,24 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/dashboard">Home</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/dashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/volunteers">Volunteer</a>
+            <a class="nav-link" href="/admin/volunteers">Volunteer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/lessfortunates">Less Fortunate</a>
+            <a class="nav-link" href="/admin/lessfortunates">Less Fortunate</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/reports">Report</a>
+            <a class="nav-link" href="/admin/reports">Report</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/aidaccomplishment">Aid Accomplishment</a>
+            <a class="nav-link" href="/admin/aidaccomplishments">Aid Accomplishment</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/admin/lessfortunates/create" class="btn btn-primary mr-2 mb-1">Cerate New Less Fortunate</a></li>
+        <li><a href="/admin/lessfortunates/create" class="btn btn-primary mr-2 mb-1">Create New Less Fortunate</a></li>
         <li></li>
         <li><a href="{{route('logout')}}" class="btn btn-danger">Logout</a></li>
       </ul>

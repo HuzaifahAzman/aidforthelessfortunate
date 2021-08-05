@@ -20,10 +20,11 @@ class AuthenticationsController extends Controller
         // dd($request->all());
         $request->session()->flush();
         
-        $data = User::where('email', $request->email)->firstOrFail();
+        $data = User::where('email', $request->email)->first();
         // dd($data->email);
         if ($data){
             if (Hash::check($request->password, $data->password)){
+                session(['user_id' => $data->id]);
                 if ($data->userType == 'Admin'){
                     session(['admin_login' => true]);
                     return redirect('/admin/dashboard');

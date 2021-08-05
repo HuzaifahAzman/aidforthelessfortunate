@@ -1,14 +1,43 @@
 @extends('layouts.appAdmin')
 
 @section('content')
-    <h3 class="text-dark mb-3">Report</h3>
-    <p>*Bolded items are the new information reported</p>
-    <p>*Above row is the original Less Fortunate data</p>
+    <h3 class="text-dark mb-3">Report 
+
+        <a class="" data-toggle="modal" data-target="#exampleModalCenter" style="color: black; cursor: pointer">
+            <i class="bi bi-question-circle"></i>
+        </a>
+    </h3>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Report Guide</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Bolded information represents the correct information based on the report submitter.
+                </p>
+                <p>
+                    Rejecting a report will cancel the change towards the Less Fortunate data.
+                </p>
+                <p>
+                    Approving will update the Less Fortunate data based on the new data given on the report.
+                </p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
     @if(count($reports) > 0) 
-        <table class="table">
+        <table class="table table-bordered table-hover">
             <thead>
-                <tr class="" style="background-color: #343a40; color:white">
+                <tr class="table-light">
                     <th>Report ID</th>
                     <th>User ID</th>
                     <th>Name</th>
@@ -20,7 +49,7 @@
 
             @foreach ($reports as $report)
                 <tbody>
-                    <tr class="@if($loop->odd) table-primary @else table-info @endif">
+                    <tr class="@if($loop->odd) table-active @endif">
                         <th rowspan="2">{{$report->id}}</th>
                         <th rowspan="2">{{$report->lessFortunate_id}}</th>
                         <td>{{$report->LF_name}}</td>
@@ -72,7 +101,7 @@
                         </td>
                     </tr>
                     @if ($report->status != 'approved')
-                        <tr class="@if($loop->odd) table-primary @else table-info @endif">
+                        <tr class="@if($loop->odd) table-active @endif">
                             <td>@if($report->name != $report->LF_name) <b>{{$report->name}}</b> @else {{$report->name}} @endif</td>
                             <td>
                                 @if($report->LF_address != $report->address || $report->LF_address2 != $report->address2 || $report->LF_city != $report->city || $report->LF_state != $report->state) 

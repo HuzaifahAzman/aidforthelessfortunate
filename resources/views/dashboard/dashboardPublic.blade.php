@@ -8,11 +8,10 @@
         <img class="mx-auto d-block" src="{{asset('images/bakul-kasih-ramadhan.png')}}" alt="" style="width: 400px">
     
         <p>
-            Bakul Kasih Ramadhan is one of the annual welfare programs by Yayasan Ikhlas to ease the burden of the poor and needy. 
+            Bakul Kasih Ramadhan is one of the annual welfare programs by Yayasan Ikhlas to ease the burden of the poor and needy in the month of Ramadhan. 
             According to Yayasan Ikhlas, Bakul Kasih Ramadhan that was held in 2016 had supplied aid towards 1554 beneficiaries of zakat (‘asnaf’) 
             including poor families, orphans, Muslim converts, and non-muslim families. Whereas in the year 2017, 
             the number increased to 1887 and it continues to increase throughout the year. 
-            Few stakeholders will be interviewed to capture the requirements to improve the system of Bakul Kasih Ramadhan.
         </p>
         <br>
     </div>
@@ -22,7 +21,7 @@
             <br>
             <div class="card m-2">
                 <div class="card-body">
-                    <h5>Aid Accomplishment Progress [{{$beginCampaign['begin']}} until {{$endCampaign['end']}}] <h6 class="inline">(Aid Receiver: {{$numLessFortunate}} individuals)</h6></h5>
+                    <h5>Aid Accomplishment Progress [{{date('d-M-Y', strtotime($beginCampaign['begin']))}} until {{date('d-M-Y', strtotime($endCampaign['end']))}}] <h6 class="inline">(Aid Receiver: {{$numLessFortunate}} individuals)</h6></h5>
 
                     <div class="row text-center mb-2">
                         <div class="col-2"></div>

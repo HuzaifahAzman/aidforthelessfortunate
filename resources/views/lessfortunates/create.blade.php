@@ -26,7 +26,10 @@
         </div>
         <div class="form-group">
             {{Form::label('state', 'State')}}
-            {{Form::select('state', ['Selangor' => 'Selangor', 'Sabah' => 'Sabah', 'Johor' => 'Johor'], null, ['class' => 'form-control', 'placeholder' => 'Select a state...'])}}
+            {{Form::select('state', ['Johor' => 'Johor', 'Kedah' => 'Kedah', 'Kelantan' => 'Kelantan', 'Melaka' => 'Melaka', 
+            'Negeri Sembilan' => 'Negeri Sembilan', 'Pahang' => 'Pahang', 'Penang' => 'Penang', 'Perak' => 'Perak', 
+            'Perlis' => 'Perlis', 'Sabah' => 'Sabah', 'Sarawak' => 'Sarawak', 'Selangor' => 'Selangor', 'Terengganu' => 'Terengganu'], 
+            null, ['class' => 'form-control', 'placeholder' => 'Select a state...'])}}
         </div>
         <div class="form-group">
             {{Form::label('postcode', 'Postcode')}}

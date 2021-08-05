@@ -23,7 +23,6 @@ class CreateLessFortunatesTable extends Migration
             $table->string('state');
             $table->integer('postcode');
             
-            
             $table->string('phone');
             $table->timestamps();
         });

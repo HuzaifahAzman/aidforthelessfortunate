@@ -10,3 +10,16 @@ ni untuk migration
 php artisan make:migration add_paid_to_users_table --table=users
 
 ->withErrors('error!');
+
+{{QrCode::generate('https://www.yayasanikhlas.org.my/index.html')}}
+
+php artisan make:model --mcr test
+
+redirect()->action('DashboardController@adminDashboard')->with('success', 'Successfully Reset Aid Accomplishment Status')
+
+->leftjoin('aid_accomplishments', 'aid_accomplishments.lessFortunate_id', '=', 'less_fortunates.id')
+
+->leftJoin('aid_accomplishments',function ($join) {
+    $join->on('aid_accomplishments.lessFortunate_id', '=', 'less_fortunates.id') ;
+    $join->where('aid_accomplishments.status','=', 1) ;
+})

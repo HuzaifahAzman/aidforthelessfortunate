@@ -5,7 +5,7 @@
 
         <div class="card mt-3 ">
             <div class="card-body">
-                <h5>Aid Accomplishment Progress [{{$beginCampaign['begin']}} until {{$endCampaign['end']}}] <h6 class="inline">(Aid Receiver: {{$numLessFortunate}} individuals)</h6></h5>
+                <h5>Aid Accomplishment Progress [{{date('d-M-Y', strtotime($beginCampaign['begin']))}} until {{date('d-M-Y', strtotime($endCampaign['end']))}}] <h6 class="inline">(Aid Receiver: {{$numLessFortunate}} individuals)</h6></h5>
                 
                 <div class="row text-center mb-2">
                     <div class="col-2"></div>

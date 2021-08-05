@@ -58,8 +58,15 @@
                 </div>
                 <div class="col-2"></div>
             </div>
-            <div class="row">
-                <a class="btn btn-primary mx-auto" href="/admin/dashboard/editCampaign">Update Campaign Date</a>
+            <div class="row my-0 px-4">
+                <div class="col-2"></div>
+                <div class="col-8 text-center">
+                    <div class="form-group">
+                        <a class="btn btn-primary " href="/admin/dashboard/editCampaign">Update Campaign Date</a>
+                        <a class="btn btn-danger " href="/admin/dashboard/resetAid">Reset Aid Status</a>
+                    </div>
+                </div>
+                <div class="col-2"></div>
             </div>
             <hr>
             <div class="row text-center mb-2">

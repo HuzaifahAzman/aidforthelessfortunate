@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users =  User::orderBy('id', 'asc')->paginate(4);
+        $users =  User::orderBy('id', 'asc')->paginate(10);
 
         return view('users.index')->with('users', $users);
     }
@@ -112,7 +112,7 @@ class UsersController extends Controller
 
         $user->save();
         
-        return redirect('/admin/volunteers')->with('success', 'New User Data Created');
+        return redirect('/admin/volunteers')->with('success', 'User Data Updated');
     }
 
     /**

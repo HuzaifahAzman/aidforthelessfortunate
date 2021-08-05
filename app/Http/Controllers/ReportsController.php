@@ -17,7 +17,6 @@ class ReportsController extends Controller
      */
     public function index()
     {
-        // $reports =  Report::orderBy('id', 'asc')->paginate(4);
         $joinedreports =  DB::table('reports')
                     ->join('less_fortunates', 'less_fortunates.id', '=', 'reports.lessFortunate_id')
                     ->select('reports.*', 'less_fortunates.name as LF_name', 'less_fortunates.address as LF_address',
@@ -25,7 +24,7 @@ class ReportsController extends Controller
                     'less_fortunates.postcode as LF_postcode', 'less_fortunates.phone as LF_phone', 'less_fortunates.postcode as postcode',
                     'less_fortunates.phone as LF_phone')
                     ->orderBy('lessFortunate_id', 'asc')
-                    ->paginate(4);
+                    ->paginate(7);
 
         // dd($reports);
 
@@ -48,7 +47,7 @@ class ReportsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storePublic(Request $request) // TODO public ngan volunteer je
+    public function storePublic(Request $request) 
     {
         $this->validate($request, [
             'id' => 'required',
@@ -92,7 +91,7 @@ class ReportsController extends Controller
         return redirect('/reports')->with('success', 'Report Has Been Submitted');
     }
 
-    public function storeVolunteer(Request $request) // TODO public ngan volunteer je
+    public function storeVolunteer(Request $request) 
     {
         $this->validate($request, [
             'id' => 'required',
@@ -152,7 +151,7 @@ class ReportsController extends Controller
     public function showVolunteer(Request $request)
     {
         $this->validate($request, [
-            'id' => 'required',
+            'id' => 'required|exists:less_fortunates',
         ]);
 
         $lessfortunate = LessFortunate::find($request->input('id'));
@@ -177,7 +176,7 @@ class ReportsController extends Controller
      * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) //TODO activation
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'action' => 'required',

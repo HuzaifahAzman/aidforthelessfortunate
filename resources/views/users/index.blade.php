@@ -43,12 +43,10 @@
                 </tbody>
             @endforeach
         </table>
-
-        <br>
         {{$users->links()}}
 
     @else
-        <p>No Less Fortunate Record Found.</p>
+        <p>No User Record Found.</p>
     @endif
 @endsection
 
